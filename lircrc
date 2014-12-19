@@ -1,0 +1,774 @@
+begin
+button = KEY_VOLUMEDOWN
+prog = irexec
+config = echo -n ( > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_PLAYPAUSE
+prog = irexec
+config = echo -n p > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_VOLUMEUP
+prog = irexec
+config = echo -n ) > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_SETUP
+prog = irexec
+config = echo -n x > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_UP
+prog = irexec
+config = echo -n t > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_STOP
+prog = irexec
+config = su -c "pianobar &" -s /bin/sh pi
+config = echo -n q > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_LEFT
+prog = irexec
+config = echo -n - > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_ENTER
+prog = irexec
+config = echo -n v > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_RIGHT
+prog = irexec
+config = echo -n + > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP0
+button = KEY_KP1
+prog = irexec
+config = echo -ne "s0\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP0
+button = KEY_KP2
+prog = irexec
+config = echo -ne "s1\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP0
+button = KEY_KP3
+prog = irexec
+config = echo -ne "s2\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP0
+button = KEY_KP4
+prog = irexec
+config = echo -ne "s3\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP0
+button = KEY_KP5
+prog = irexec
+config = echo -ne "s4\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP0
+button = KEY_KP6
+prog = irexec
+config = echo -ne "s5\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP0
+button = KEY_KP7
+prog = irexec
+config = echo -ne "s6\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP0
+button = KEY_KP8
+prog = irexec
+config = echo -ne "s7\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP0
+button = KEY_KP9
+prog = irexec
+config = echo -ne "s8\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP1
+button = KEY_KP0
+prog = irexec
+config = echo -ne "s9\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP1
+button = KEY_KP1
+prog = irexec
+config = echo -ne "s10\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP1
+button = KEY_KP2
+prog = irexec
+config = echo -ne "s11\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP1
+button = KEY_KP3
+prog = irexec
+config = echo -ne "s12\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP1
+button = KEY_KP4
+prog = irexec
+config = echo -ne "s13\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP1
+button = KEY_KP5
+prog = irexec
+config = echo -ne "s14\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP1
+button = KEY_KP6
+prog = irexec
+config = echo -ne "s15\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP1
+button = KEY_KP7
+prog = irexec
+config = echo -ne "s16\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP1
+button = KEY_KP8
+prog = irexec
+config = echo -ne "s17\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP1
+button = KEY_KP9
+prog = irexec
+config = echo -ne "s18\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP2
+button = KEY_KP0
+prog = irexec
+config = echo -ne "s19\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP2
+button = KEY_KP1
+prog = irexec
+config = echo -ne "s20\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP2
+button = KEY_KP2
+prog = irexec
+config = echo -ne "s21\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP2
+button = KEY_KP3
+prog = irexec
+config = echo -ne "s22\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP2
+button = KEY_KP4
+prog = irexec
+config = echo -ne "s23\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP2
+button = KEY_KP5
+prog = irexec
+config = echo -ne "s24\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP2
+button = KEY_KP6
+prog = irexec
+config = echo -ne "s25\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP2
+button = KEY_KP7
+prog = irexec
+config = echo -ne "s26\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP2
+button = KEY_KP8
+prog = irexec
+config = echo -ne "s27\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP2
+button = KEY_KP9
+prog = irexec
+config = echo -ne "s28\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP3
+button = KEY_KP0
+prog = irexec
+config = echo -ne "s29\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP3
+button = KEY_KP1
+prog = irexec
+config = echo -ne "s30\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP3
+button = KEY_KP2
+prog = irexec
+config = echo -ne "s31\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP3
+button = KEY_KP3
+prog = irexec
+config = echo -ne "s32\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP3
+button = KEY_KP4
+prog = irexec
+config = echo -ne "s33\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP3
+button = KEY_KP5
+prog = irexec
+config = echo -ne "s34\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP3
+button = KEY_KP6
+prog = irexec
+config = echo -ne "s35\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP3
+button = KEY_KP7
+prog = irexec
+config = echo -ne "s36\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP3
+button = KEY_KP8
+prog = irexec
+config = echo -ne "s37\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP3
+button = KEY_KP9
+prog = irexec
+config = echo -ne "s38\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP4
+button = KEY_KP0
+prog = irexec
+config = echo -ne "s39\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP4
+button = KEY_KP1
+prog = irexec
+config = echo -ne "s40\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP4
+button = KEY_KP2
+prog = irexec
+config = echo -ne "s41\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP4
+button = KEY_KP3
+prog = irexec
+config = echo -ne "s42\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP4
+button = KEY_KP4
+prog = irexec
+config = echo -ne "s43\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP4
+button = KEY_KP5
+prog = irexec
+config = echo -ne "s44\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP4
+button = KEY_KP6
+prog = irexec
+config = echo -ne "s45\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP4
+button = KEY_KP7
+prog = irexec
+config = echo -ne "s46\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP4
+button = KEY_KP8
+prog = irexec
+config = echo -ne "s47\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP4
+button = KEY_KP9
+prog = irexec
+config = echo -ne "s48\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP5
+button = KEY_KP0
+prog = irexec
+config = echo -ne "s49\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP5
+button = KEY_KP1
+prog = irexec
+config = echo -ne "s50\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP5
+button = KEY_KP2
+prog = irexec
+config = echo -ne "s51\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP5
+button = KEY_KP3
+prog = irexec
+config = echo -ne "s52\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP5
+button = KEY_KP4
+prog = irexec
+config = echo -ne "s53\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP5
+button = KEY_KP5
+prog = irexec
+config = echo -ne "s54\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP5
+button = KEY_KP6
+prog = irexec
+config = echo -ne "s55\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP5
+button = KEY_KP7
+prog = irexec
+config = echo -ne "s56\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP5
+button = KEY_KP8
+prog = irexec
+config = echo -ne "s57\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP5
+button = KEY_KP9
+prog = irexec
+config = echo -ne "s58\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP6
+button = KEY_KP0
+prog = irexec
+config = echo -ne "s59\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP6
+button = KEY_KP1
+prog = irexec
+config = echo -ne "s60\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP6
+button = KEY_KP2
+prog = irexec
+config = echo -ne "s61\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP6
+button = KEY_KP3
+prog = irexec
+config = echo -ne "s62\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP6
+button = KEY_KP4
+prog = irexec
+config = echo -ne "s63\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP6
+button = KEY_KP5
+prog = irexec
+config = echo -ne "s64\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP6
+button = KEY_KP6
+prog = irexec
+config = echo -ne "s65\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP6
+button = KEY_KP7
+prog = irexec
+config = echo -ne "s66\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP6
+button = KEY_KP8
+prog = irexec
+config = echo -ne "s67\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP6
+button = KEY_KP9
+prog = irexec
+config = echo -ne "s68\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP7
+button = KEY_KP0
+prog = irexec
+config = echo -ne "s69\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP7
+button = KEY_KP1
+prog = irexec
+config = echo -ne "s70\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP7
+button = KEY_KP2
+prog = irexec
+config = echo -ne "s71\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP7
+button = KEY_KP3
+prog = irexec
+config = echo -ne "s72\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP7
+button = KEY_KP4
+prog = irexec
+config = echo -ne "s73\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP7
+button = KEY_KP5
+prog = irexec
+config = echo -ne "s74\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP7
+button = KEY_KP6
+prog = irexec
+config = echo -ne "s75\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP7
+button = KEY_KP7
+prog = irexec
+config = echo -ne "s76\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP7
+button = KEY_KP8
+prog = irexec
+config = echo -ne "s77\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP7
+button = KEY_KP9
+prog = irexec
+config = echo -ne "s78\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP8
+button = KEY_KP0
+prog = irexec
+config = echo -ne "s79\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP8
+button = KEY_KP1
+prog = irexec
+config = echo -ne "s80\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP8
+button = KEY_KP2
+prog = irexec
+config = echo -ne "s81\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP8
+button = KEY_KP3
+prog = irexec
+config = echo -ne "s82\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP8
+button = KEY_KP4
+prog = irexec
+config = echo -ne "s83\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP8
+button = KEY_KP5
+prog = irexec
+config = echo -ne "s84\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP8
+button = KEY_KP6
+prog = irexec
+config = echo -ne "s85\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP8
+button = KEY_KP7
+prog = irexec
+config = echo -ne "s86\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP8
+button = KEY_KP8
+prog = irexec
+config = echo -ne "s87\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP8
+button = KEY_KP9
+prog = irexec
+config = echo -ne "s88\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP9
+button = KEY_KP0
+prog = irexec
+config = echo -ne "s89\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP9
+button = KEY_KP1
+prog = irexec
+config = echo -ne "s90\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP9
+button = KEY_KP2
+prog = irexec
+config = echo -ne "s91\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP9
+button = KEY_KP3
+prog = irexec
+config = echo -ne "s92\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP9
+button = KEY_KP4
+prog = irexec
+config = echo -ne "s93\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP9
+button = KEY_KP5
+prog = irexec
+config = echo -ne "s94\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP9
+button = KEY_KP6
+prog = irexec
+config = echo -ne "s95\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP9
+button = KEY_KP7
+prog = irexec
+config = echo -ne "s96\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP9
+button = KEY_KP8
+prog = irexec
+config = echo -ne "s97\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP9
+button = KEY_KP9
+prog = irexec
+config = echo -ne "s98\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP0
+button = KEY_KP0
+prog = irexec
+config = echo -ne "s99\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+
+begin
+button = KEY_DOWN
+prog = irexec
+config = echo -n n > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_BACK
+prog = irexec
+config = echo -n s > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_SETUP
+button = KEY_SETUP
+prog = irexec
+config = espeak "re-booting now" && reboot
+end
