@@ -1,0 +1,1877 @@
+An Advanced Streaming Internet Radio Player with Raspberry Pi
+
+Jeremy W Gilreath
+Chafic Bou Saba
+Department of Computer Technology and Information Systems
+Guilford College
+{gilreathjw, bousabacw}@guilford.edu
+
+Step-By-Step Guide
+
+Step 001:	Format the SD Card
+Action:		Use SDFormatter 4 (Windows) or command line (Linux) to format the SD Card with FAT-32 Filesystem	
+
+----------
+
+Step 002:	Install NOOBS
+Action:		Use Win32 Disk Imager (Windows) or command line (Linux) to burn the NOOBS Image onto the SD Card
+
+----------
+
+Step 003:	Attach cables to Raspberry Pi
+Action:		Connect HDMI Out, Mouse, Keyboard, RJ-45, and finally Power
+
+----------
+
+Step 004:	Install Raspbian (Regular, NOT Boot to Scratch)
+Action:		Select Raspbian from the menu of Operating Systems and press 'i'
+
+----------
+
+Step 005:	Confirm Installation
+Action:		Click 'OK' on the message window - Raspberry Pi will automatically reboot and load Raspi-Config
+
+----------
+
+Step 006:	Raspi-Config - Advanced Options > Update
+Action:		Select this option to make sure that Raspi-Config is updated to the latest version
+Reference:	01
+
+----------
+
+Step 007:	Raspi-Config - Expand Filesystem
+Action:		Select this option to make sure the filesystem is expanded to fill your entired SD card
+Reference:	01
+
+----------
+
+Step 008:	Raspi-Config - Change User Password
+Action:		Select this option to make your Pi more secure and change the password from the default 'raspberry'
+Reference:	01
+
+----------
+
+Step 009:	Raspi-Config - Internationalisation Options > Change Locale (1)
+Action:		Select this option to configure the Pi to use your language, country, characters, collation order, etc.  Default is en_GB.UTF-8 UTF-8 (press 'Space
+
+----------
+
+Step 010:	Raspi-Config - Internationalisation Options > Change Locale (2)
+Action:		Press 'Space' to deselect the default option of is en_GB.UTF-8 UTF-8
+
+----------
+
+Step 011:	Raspi-Config - Internationalisation Options > Change Locale (3)
+Action:		Press 'Space' to select your desired option - mine is en_US.UTF-8 UTF-8 - and press 'Enter' to confirm
+
+----------
+
+Step 012:	Raspi-Config - Internationalisation Options > Change Locale (4)
+Action:		Press 'Down' to select the option you chose and press 'Enter' to confirm
+
+----------
+
+Step 013:	Raspi-Config - Internationalisation Options > Change Timezone (1)
+Action:		Select this option to configure the Pi to your Timezone
+Reference:	01
+
+----------
+
+Step 014:	Raspi-Config - Internationalisation Options > Change Timezone (2)
+Action:		Scroll to your geographic area and press 'Enter' - mine is US
+Reference:	01
+
+----------
+
+Step 015:	Raspi-Config - Internationalisation Options > Change Timezone (3)
+Action:		Scroll to your Timezone and press 'Enter' - mine is 'Eastern'
+Reference:	01
+
+----------
+
+Step 016:	Raspi-Config - Internationalisation Options > Change Keyboard Layout
+Action:		OPTIONAL
+Reference:	01
+
+----------
+
+Step 017:	Raspi-Config - Advanced Options > Overscan
+Action:		Enable Overscan by pressing 'Enter' on the popup screen
+Reference:	01
+
+----------
+
+Step 018:	Raspi-Config - Advanced Options > Hostname
+Action:		Changes the Hostname in /etc/hostname and /etc/hosts from the Default 'raspberrypi' to something like 'pandorapi'
+Reference:	01
+
+----------
+
+Step 019:	Raspi-Config - Advanced Options > Memory Split
+Action:		Change the amount of RAM available to the GPU from 64 (Default) to 16 (Minimum) - system will be headless
+Reference:	01
+
+----------
+
+Step 020:	Raspi-Config - Advanced Options > SSH
+Action:		Enable SSH by pressing 'Enter' on the popup screen, then 'Enter' again to confirm
+Reference:	01
+
+----------
+
+Step 021:	Raspi-Config > Finish
+Action:		Finish configuring the Pi and Reboot when prompted
+
+----------
+
+Step 022:	Update the packages list to the latest version
+Action:		sudo apt-get upgrade
+
+----------
+
+Step 023:	Update all installed software
+Action:		sudo apt-get update
+
+----------
+
+Step 024:	Update the Operating System
+Action:		sudo apt-get dist-upgrade
+
+----------
+
+Step 025:	Install ntpdate
+Action:		sudo apt-get install ntpdate
+Reference:	02
+
+----------
+
+Step 026:	Set ntpdate to use an unprivileged port
+Action:		sudo ntpdate -u ntp.ubuntu.com
+
+----------	WAS ALREADY THE NEWEST VERSION
+
+Step 027:	Install git-core
+Action:		sudo apt-get install git-core
+
+----------
+
+Step 028:	Download Hexxeh's RPi-Update Script
+Action:		sudo wget http://goo.gl/1BOfJ -O /usr/bin/rpi-update
+			(sudo wget https://raw.github.com/Hexxeh/rpi-update/master/rpi-update -O /usr/bin/rpi-update)
+Reference:	03
+
+----------
+
+Step 029:	Set Permissions
+Action:		sudo chmod +x /usr/bin/rpi-update
+Reference:	03
+
+----------
+
+Step 030:	Update the Raspberry Pi Firmware
+Action:		sudo BRANCH=next rpi-update
+Reference:	04
+
+----------
+
+Step 031:	Reboot
+Action:		sudo reboot
+
+----------
+
+Step 032:	Set up i2c - edit /etc/modules
+Action:		sudo nano /etc/modules
+
+# /etc/modules: kernel modules to load at boot time.
+#
+# This file contains the names of kernel modules that should be loaded
+# at boot time, one per line. Lines beginning with "#" are ignored.
+# Parameters can be specified after the module name.
+
+i2c-bcm2708
+i2c-dev
+
+Reference:	04
+
+----------
+
+Step 033:	Reboot
+Action:		sudo reboot
+
+----------
+
+Step 034:	Add SMBus support to Python
+Action:		sudo apt-get install python-smbus
+Reference:	04
+
+----------
+
+Step 035:	Install i2c-tools - already the newest version as of 04/30/2014
+Action:		sudo apt-get install i2c-tools
+Reference:	04
+
+----------
+
+Step 036:	Set up i2c - once again edit /etc/modules
+Action:		sudo nano /etc/modules
+
+# /etc/modules: kernel modules to load at boot time.
+#
+# This file contains the names of kernel modules that should be loaded
+# at boot time, one per line. Lines beginning with "#" are ignored.
+# Parameters can be specified after the module name.
+
+snd-bcm2835
+i2c-bcm2708
+i2c-dev
+
+Reference:	04
+
+----------
+
+Step 037:	Reboot
+Action:		sudo reboot
+
+----------
+
+Step 038:	Test i2c-tools
+Action:		sudo i2cdetect -y 1
+
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:            --  -- --  -- --  -- --  -- --  -- --  -- -- 
+10: -- --  -- --  -- --  -- --  -- --  -- --  -- --  -- -- 
+20: 20 -- -- --  -- --  -- --  -- --  -- --  -- --  -- -- 
+30: -- --  -- --  -- --  -- --  -- --  -- UU -- -- -- -- 
+40: -- --  -- --  -- --  -- --  -- --  -- --  -- --  -- -- 
+50: -- --  -- --  -- --  -- --  -- --  -- --  -- --  -- -- 
+60: -- --  -- --  -- --  -- --  -- --  -- --  -- --  -- -- 
+70: -- --  -- --  -- --  -- --
+
+Reference:	04
+
+----------
+
+Step 039:	Install python-dev
+Action:		sudo apt-get install python-dev
+Reference:	04
+
+----------
+
+Step 040:	Install RPi.GPIO - already the newest version as of 04/30/2014
+Action:		sudo apt-get install python-rpi.gpio
+
+----------
+
+Step 041:	Clone into Adafruit's Python repository
+Action:		git clone https://github.com/adafruit/Adafruit-Raspberry-Pi-Python-Code.git
+Reference:	04
+
+----------
+
+Step 042:	Navigate to that directory
+Action:		cd Adafruit-Raspberry-Pi-Python-Code
+Reference:	04
+
+----------
+
+Step 043:	Navigate to the directory for the CharLCDPlate
+Action:		cd Adafruit_CharLCDPlate
+Reference:	04
+
+----------
+
+Step 044:	Test the library
+Action:		sudo python Adafruit_CharLCDPlate.py
+
+Cycle thru backlight colors
+Red
+Yellow
+Green
+Teal
+Blue
+Violet
+Off
+On
+Try buttons on plate
+
+Reference:	04
+
+----------
+
+Step 045:	Adjust contrast potentiometer
+Action:		Get out a phillips head screwdriver and adjust the potentiometer until you see text clearly
+Reference:	04
+
+----------
+
+Step 046:	Test Buttons
+Action:		Test out every single one of your buttons - they should all be accompanied with color, text, and command line message
+Reference:	04
+
+----------
+
+Step 047:	Configure wireless networking (1)
+Action:		sudo nano /etc/network/interfaces - For an unsecured network, insert wireless-essid - for secured network, insert wpa-ssid and wpa-psk
+
+CHANGE:
+
+auto lo
+
+iface lo inet loopback
+iface eth0 inet dhcp
+
+allow-hotplug wlan0
+#iface wlan0 inet manual
+#wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
+#iface default inet dhcp
+
+TO:
+
+auto lo
+
+iface lo inet loopback
+
+iface eth0 inet dhcp
+#<Wired IP Address for reference>
+
+auto wlan0
+allow-hotplug wlan0
+iface wlan0 inet dhcp
+	wpa-ssid "NETWORK_ID"
+	wpa-psk "NETWORK_PASSWORD"
+# <Wireless IP Address for reference>
+
+Reference:	01 05
+
+----------
+
+Step 048:	Unplug mouse, replace with Sound Card
+Action:		unplug the mouse (we don't use it) and replace it with the USB Sound Card and headphones/speakers plugged in
+
+----------
+
+Step 049:	Reboot
+Action:		sudo reboot
+
+----------
+
+Step 050:	Updating Alsa Options
+Action:		sudo nano /etc/modprobe.d/alsa-base.conf
+
+CHANGE: 
+
+options snd-usb-audio index=-2
+
+TO:
+
+options snd-usb-audio index=0
+
+Reference:	06
+
+----------
+
+Step 051:	Reboot
+Action:		sudo reboot
+
+----------
+
+Step 052:	Speaker Test
+Action:		speaker-test -c2 -D hw:0,0
+Reference:	06
+
+----------
+
+Step 053:	Kill Program
+Action:		ctrl+c
+
+----------
+
+Step 054:	Shutdown
+Action:		sudo shutdown -h now
+
+----------
+
+Step 055:	Unplug ethernet and sound card, replace with wireless USB Adapter
+Action:		Unplug the ethernet cable (we'll be wireless from now on) and the sound card temporarily (we'll replace it with the wireless USB Adapter)
+
+----------
+
+Step 056:	Boot Raspberry Pi
+Action:		Unplug and replug the power cord
+
+----------
+
+Step 057:	Test Wireless
+Action:		ping -c 1 google.com
+Reference:	06
+
+----------
+
+Step 058:	Record IP Address
+Action:		ifconfig wlan0
+
+inet addr: <ip address>
+
+Reference:	06
+
+----------
+
+Step 059:	Shutdown
+Action:		sudo shutdown -h now
+
+----------
+
+Step 060:	Unplug HDMI and keyboard, replace with sound card
+Action:		Unplug the HDMI cable (we'll be using SSH from now on) and the keyboard (we'll replace it with the sound card)
+
+----------
+
+Step 061:	Boot Raspberry Pi
+Action:		Unplug and replug the power cord
+
+----------
+
+Step 062:	Login via SSH
+Action:		ssh pi@<ip address>
+
+pi@<ip adddress>'s password: <password>
+
+Reference:	06
+
+----------
+
+Step 063:	Accept Host Key
+Action:		Press 'Enter' to accept the Host Key for security purposes
+Reference:	06
+
+----------
+
+Step 064:	Navigate to Pandora.com on your computer
+Action:		www.pandora.com
+
+----------
+
+Step 065:	Create an account
+Action:		click 'register' on the upper-right and fill out the requisite information
+
+----------
+
+Step 066:	Create a new station
+Action:		Enter in the Artist or Song
+
+----------
+
+Step 067:	Install Pianobar
+Action:		sudo apt-get install pianobar
+Reference:	06
+
+----------
+
+Step 068:	Download the pexpect library for Python
+Action:		git clone https://github.com/pexpect/pexpect.git
+Reference:	06 (information in source is still valid, but my updated clone URL is preferred)
+
+----------
+
+Step 069:	Navigate to the directory
+Action:		cd pexpect
+Reference:	06
+
+----------
+
+Step 070:	Install the library
+Action:		sudo python ./setup.py install
+Reference:	06
+
+----------
+
+Step 071:	Navigate back to the previous folder
+Action:		cd ..
+Reference:	06
+
+----------
+
+Step 072:	Delete the extracted files
+Action:		sudo rm -r pexpect
+Reference:	06
+
+----------
+
+Step 073:	Clone into Adafruit's WiFi Repository
+Action:		git clone https://github.com/adafruit/Python-WiFi-Radio
+Reference:	06
+
+----------
+
+Step 074:	Navigate to the new directory
+Action:		cd Python-WiFi-Radio
+Reference:	06
+
+----------
+
+Step 075:	Make symbolic links to all python files in the CharLCDPlate folder
+Action:		ln -s ../Adafruit-Raspberry-Pi-Python-Code/Adafruit_CharLCDPlate/*.py .
+
+----------
+
+Step 076:	Reboot
+Action:		sudo reboot
+
+----------
+
+Step 077:	Login via SSH
+Action:		ssh pi@<ip address>
+
+pi@<ip adddress>'s password: <password>
+
+Reference:	06
+
+----------
+
+Step 078:	Make a folder for pianobar configuration
+Action:		mkdir -p .config/pianobar
+Reference:	06
+
+----------
+
+Step 079:	Navigate to this directory
+Action:		cd .config/pianobar
+Reference:	06
+
+----------
+
+Step 080:	Make a symbolic link to Adafruit's configuration file
+Action:		ln -s ../../Python-WiFi-Radio/config .
+Reference:	06
+
+----------
+
+Step 081:	Edit the configuration file
+Action:		nano config
+
+CHANGE:
+
+user = YOUR_EMAIL_ADDRESS
+password = YOUR_PASSWORD
+
+TO :
+
+user = <pandora username>
+password = <pandora password>
+
+Reference:	06
+
+----------
+
+Step 082:	Copy TLS fingerprint from web and insert into config file
+Action:		fingerprint=`openssl s_client -connect tuner.pandora.com:443 < /dev/null 2> /dev/null | openssl x509 -noout -fingerprint | tr -d ':' | cut -d'=' -f2` && echo tls_fingerprint = $fingerprint >> ~/.config/pianobar/config
+Reference:	06 07
+
+----------
+
+Step 083:	Test pianobar
+Action:		pianobar
+Reference:	06
+
+======================	IF YOU GET A TLS FINGERPRINT READ ERROR, CONTINUE HERE; OTHERWISE SKIP TO STEP 112
+
+Step 084:	Uninstall pianobar
+Action:		sudo apt-get autoremove pianobar
+Reference:	08
+
+----------
+
+Step 085:	Change back to the home directory
+Action:		cd ~/
+Reference:	08
+
+----------
+
+Step 086:	Clone into pianobar’s git repository
+Action:		git clone https://github.com/PromyLOPh/pianobar.git
+Reference:	08
+
+----------
+
+Step 087:	Navigate to the pianobar directory
+Action:		cd pianobar
+Reference:	08
+
+----------
+
+Step 088:	Make sure all the dependencies for compiling from source code are met
+Action:		sudo apt-get install ffmpeg libavcodec-dev libavfilter-dev libavformat-dev libao-dev libgcrypt11-dev libgnutls-dev libfaad-dev libmad0-dev libjson0-dev make pkg-config
+Reference:	08
+
+----------
+
+Step 089:	edit the Makefile to define your implementation of libav
+Action:		nano Makefile
+Reference:	09 10
+
+CHANGE:
+
++# choose your libav implementation.
++# supported: ffmpeg2.2, ffmpeg2.1, ffmpeg1.2, libav10, libav9
++LIBAV:=undefined
+
+TO:
+
++# choose your libav implementation.
++# supported: ffmpeg2.2, ffmpeg2.1, ffmpeg1.2, libav10, libav9
++LIBAV:=libav10
+
+----------
+
+Step 090:	Compile from source code
+Action:		make
+Reference:	08
+
+================	IF YOU GET A LIBAVFILTER/BUFFERSINK.H FATAL ERROR
+src/player.c:40:36: fatal error: libavfilter/buffersink.h: No such file or directory
+compilation terminated.
+
+Step 091:	edit sources list to add support for Wheezy backports
+Action:		sudo nano /etc/apt/sources.list
+Reference:	08
+
+ADD:
+
+### BACKPORTS
+deb http://ftp.debian.org/debian wheezy-backports main contrib non-free
+
+
+AFTER:
+
+deb http://mirrordirector.raspbian.org/raspbian/ wheezy main contrib non-free rpi
+
+----------
+
+Step 092:	Reboot so Wheezy will pick up changes to sources.list
+Action:		sudo reboot
+Reference:	11
+
+----------
+
+Step 093:	Update apt
+Action:		sudo apt-get update
+Reference:	06
+
+======================	IF YOU GET A W: GPG NO_PUBKEY ERROR
+W: GPG error: http://ftp.debian.org wheezy-backports Release: The following signatures couldn't be verified because the public key is not available: NO_PUBKEY 8B48AD6246925553
+
+Step 094:	Get the public key from the server
+Action:		gpg --keyserver pgpkeys.mit.edu --recv-key  8B48AD6246925553
+Reference:	12
+
+----------
+
+Step 095:	Add the public key to apt
+Action:		gpg -a --export 8B48AD6246925553 | sudo apt-key add -
+Reference:	12
+
+----------
+
+Step 096:	Install the backport of libavfilter
+Action:		sudo apt-get -t wheezy-backports install libavfilter-dev
+Reference:	13
+
+----------
+
+Step 097:	Change to the pianobar directory
+Action:		cd pianobar
+
+----------
+
+Step 098:	Try to compile from source code again
+Action:		make clean
+Reference:	08
+
+----------
+
+Step 099:	Install pianobar
+Action:		sudo make install
+Reference:	08
+
+----------
+
+Step 100:	Delete pickle file that Adafruit scripts reference, if it exists
+Action:		rm ~/.config/pianobar/state.p
+Reference:	08
+
+----------
+
+Step 101:	Delete the source files
+Action:		rm -rf src
+
+======================	IF TLS FINGERPRINT READ ERROR STILL EXISTS
+
+Step 102:	Remove pianobar
+Action:		sudo apt-get purge pianobar
+
+----------
+
+Step 103:	Reboot
+Action:		sudo reboot
+
+----------
+
+Step 104:	Navigate to pianobar directory
+Action:		cd pianobar
+
+----------
+
+Step 105:	Clone into pianobar patch for better early termination handling
+Action:		git clone https://gist.github.com/5541265.git
+Reference:	14 15
+
+----------
+
+Step 106:	Copy the patch to current directory
+Action:		cp 5541265/tls.patch ./
+Reference:	14
+
+----------
+
+Step 107:	Apply the patch
+Action:		patch -p1 < tls.patch
+Reference:	14
+
+----------
+
+Step 108:	Delete the patch
+Action:		sudo rm tls.patch
+
+----------
+
+Step 109:	Try to compile from source code again
+Action:		make clean
+Reference:	08
+
+----------
+
+Step 110:	Install pianobar
+Action:		sudo make install
+Reference:	08
+
+----------
+
+Step 111:	Delete the patch directory
+Action:		sudo rm -rf 5541265
+
+=====================================================================
+
+Step 112:	Test pianobar
+Action:		pianobar
+Reference:	06
+
+----------
+
+Step 113:	Select Station
+Action:		Type the number for your desired station and press 'Enter'
+Reference:	06
+
+----------
+
+Step 114:	Kill the program
+Action:		ctrl+c
+
+----------
+
+Step 115:	Navigate to the WiFi Radio directory
+Action:		cd Python-WiFi-Radio
+Reference:	06
+
+----------
+
+Step 116:	Test Adafruit's radio Python script
+Action:		sudo python PiPhi.py
+Reference:	06
+
+----------
+
+Step 117:	Test Buttons
+Action:		Test all buttons on the LCD Plate
+
+From left to right, the button functions are:
+Play/Pause (tap once to pause, again to play, or hold for three seconds to exit the program).
+Station select (brings up a menu — can then use the up and down buttons to pick a station — press this button again to activate, or the Play/Pause button to cancel).
+Volume Up/Down (two buttons, one above the other)
+Next Track
+
+Reference:	06
+
+----------
+
+Step 118:	Edit the PiPhy script to allow Halt on Exit and Color
+Action:		nano PiPhi.py
+
+CHANGE:
+
+RGB_LCD      = False # Set to 'True' if using color backlit LCD
+HALT_ON_EXIT = False # Set to 'True' to shut down system when exiting
+
+TO:
+
+RGB_LCD      = True # Set to 'True' if using color backlit LCD
+HALT_ON_EXIT = True # Set to 'True' to shut down system when exiting
+
+Reference:	06
+
+----------
+
+Step 119:	Make PiPhy auto-start on boot
+Action:		sudo nano /etc/rc.local
+
+INSERT:
+
+cd /home/pi/Python-WiFi-Radio
+python PiPhi.py &
+
+BEFORE:
+
+exit 0
+
+Reference:	06
+
+----------
+
+Step 120:	Reboot
+Action:		sudo reboot
+
+----------
+
+Step 121:	Install LIRC
+Action:		sudo apt-get install lirc
+Reference:	16
+
+----------
+
+Step 122:	Edit modules that load on boot
+Action:		sudo nano /etc/modules
+
+INSERT:
+
+lirc_dev
+#lirc_rpi gpio_in_pin=23 gpio_out_pin=22
+lirc_rpi gpio_in_pin=18
+
+Reference:	16
+
+----------
+
+Step 123:	Edit lirc hardware configuration
+Action:		sudo nano /etc/lirc/hardware.conf
+
+CHAGE THE FOLLOWING:
+
+LIRCD_ARGS=""
+DRIVER="UNCONFIGURED"
+DEVICE=""
+MODULES=""
+
+TO:
+
+LIRCD_ARGS="--uinput"
+DRIVER="default"
+DEVICE="/dev/lirc0"
+MODULES="lirc_rpi"
+
+Reference:	16
+
+----------
+
+Step 124:	Edit the lirc configuration
+Action:		sudo nano /etc/lirc/lircd.conf
+
+CHANGE:
+
+#UNCONFIGURED
+#
+# To find out how to get a proper configuration file, please read:
+#
+#		/usr/share/doc/lirc/README.debian
+
+TO:
+
+# Please make this file available to others
+# by sending it to <lirc@bartelmus.de>
+#
+# this config file was automatically generated
+# using lirc-0.9.0-pre1(default) on Thu Mar 14 14:21:25 2013
+#
+# contributed by 
+#
+# brand:                       /home/pi/lircd.conf
+# model no. of remote control: 
+# devices being controlled by this remote:
+#
+ 
+begin remote
+ 
+  name  default
+  bits           16
+  flags SPACE_ENC|CONST_LENGTH
+  eps            30
+  aeps          100
+ 
+  header       8945  4421
+  one           594  1634
+  zero          594   519
+  ptrail        598
+  repeat       8949  2187
+  pre_data_bits   16
+  pre_data       0xFD
+  gap          106959
+  toggle_bit_mask 0x0
+ 
+      begin codes
+          KEY_VOLUMEDOWN           0x00FF
+          KEY_PLAYPAUSE            0x807F
+          KEY_VOLUMEUP             0x40BF
+          KEY_SETUP                0x20DF
+          KEY_UP                   0xA05F
+          KEY_STOP                 0x609F
+          KEY_LEFT                 0x10EF
+          KEY_ENTER                0x906F
+          KEY_RIGHT                0x50AF
+          KEY_KP0                  0x30CF
+          KEY_DOWN                 0xB04F
+          KEY_BACK                 0x708F
+          KEY_KP1                  0x08F7
+          KEY_KP2                  0x8877
+          KEY_KP3                  0x48B7
+          KEY_KP4                  0x28D7
+          KEY_KP5                  0xA857
+          KEY_KP6                  0x6897
+          KEY_KP7                  0x18E7
+          KEY_KP8                  0x9867
+          KEY_KP9                  0x58A7
+      end codes
+ 
+end remote
+
+----------
+
+Step 125:	Add lirc to kernel
+Action:		sudo modprobe lirc_rpi
+Reference:	17
+
+----------
+
+Step 126:	Reboot
+Action:		sudo reboot
+
+----------
+
+Step 127:	Stop LIRC
+Action:		sudo /etc/init.d/lirc stop
+Reference:	16
+
+----------
+
+Step 128:	Initiate test for the IR Remote
+Action:		mode2 -d /dev/lirc0
+Reference:	17
+
+----------
+
+Step 129:	Test the remote
+Action:		Press buttons on the remote while pointing it at the IR receiver to test the signal
+
+pulse 656
+space 1619
+pulse 650
+space 1624
+pulse 650
+space 1633
+pulse 651
+space 1611
+pulse 654
+space 40754
+pulse 9132
+space 2173
+pulse 656
+
+Reference:	17
+
+----------
+
+Step 130:	Make a place to send keypresses so pianobar can pick them up
+Action:		mkfifo ~/.config/pianobar/ctl
+Reference:	18
+
+----------
+
+Step 131:	Open a new SSH terminal
+Action:		ssh pi@<address>
+
+----------
+
+Step 132:	Install htop
+Action:		sudo apt-get install htop
+
+----------
+
+Step 133:	Start htop to view active processes
+Action:		htop
+
+----------
+
+Step 134:	Kill the process for the auto-started pianobar/python script
+Action:		move up to pianobar and press 'F9' and then 'Enter'
+
+----------
+
+Step 135:	Exit htop
+Action:		Press 'F10' or Ctrl + c
+
+----------
+
+Step 136:	Start pianobar from this terminal
+Action:		pianobar
+Reference:	18
+
+----------
+
+Step 137:	Test the fifo in the first terminal window by pausing pianobar via an echo
+Action:		echo -n p > "/home/pi/.config/pianobar/ctl"
+Reference:	18
+
+----------
+
+Step 138: 	Halt pianobar and then exit this terminal window
+Action:		Ctrl + c
+
+----------
+
+Step 139:	Create an lirc file to send keypresses to pianobar
+Action:		sudo nano /etc/lirc/lircrc
+
+begin
+button = KEY_VOLUMEDOWN
+prog = irexec
+config = echo -n ( > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_PLAYPAUSE
+prog = irexec
+config = echo -n p > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_VOLUMEUP
+prog = irexec
+config = echo -n ) > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_SETUP
+prog = irexec
+config = echo -n x > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_UP
+prog = irexec
+config = echo -n t > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_STOP
+prog = irexec
+config = su -c "pianobar &" -s /bin/sh pi
+config = echo -n q > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_LEFT
+prog = irexec
+config = echo -n - > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_ENTER
+prog = irexec
+config = echo -n b > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_RIGHT
+prog = irexec
+config = echo -n + > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP0
+button = KEY_KP1
+prog = irexec
+config = echo -ne "s0\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP0
+button = KEY_KP2
+prog = irexec
+config = echo -ne "s1\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP0
+button = KEY_KP3
+prog = irexec
+config = echo -ne "s2\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP0
+button = KEY_KP4
+prog = irexec
+config = echo -ne "s3\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP0
+button = KEY_KP5
+prog = irexec
+config = echo -ne "s4\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP0
+button = KEY_KP6
+prog = irexec
+config = echo -ne "s5\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP0
+button = KEY_KP7
+prog = irexec
+config = echo -ne "s6\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP0
+button = KEY_KP8
+prog = irexec
+config = echo -ne "s7\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP0
+button = KEY_KP9
+prog = irexec
+config = echo -ne "s8\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP1
+button = KEY_KP0
+prog = irexec
+config = echo -ne "s9\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP1
+button = KEY_KP1
+prog = irexec
+config = echo -ne "s10\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP1
+button = KEY_KP2
+prog = irexec
+config = echo -ne "s11\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP1
+button = KEY_KP3
+prog = irexec
+config = echo -ne "s12\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP1
+button = KEY_KP4
+prog = irexec
+config = echo -ne "s13\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP1
+button = KEY_KP5
+prog = irexec
+config = echo -ne "s14\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP1
+button = KEY_KP6
+prog = irexec
+config = echo -ne "s15\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP1
+button = KEY_KP7
+prog = irexec
+config = echo -ne "s16\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP1
+button = KEY_KP8
+prog = irexec
+config = echo -ne "s17\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP1
+button = KEY_KP9
+prog = irexec
+config = echo -ne "s18\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP2
+button = KEY_KP0
+prog = irexec
+config = echo -ne "s19\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP2
+button = KEY_KP1
+prog = irexec
+config = echo -ne "s20\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP2
+button = KEY_KP2
+prog = irexec
+config = echo -ne "s21\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP2
+button = KEY_KP3
+prog = irexec
+config = echo -ne "s22\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP2
+button = KEY_KP4
+prog = irexec
+config = echo -ne "s23\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP2
+button = KEY_KP5
+prog = irexec
+config = echo -ne "s24\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP2
+button = KEY_KP6
+prog = irexec
+config = echo -ne "s25\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP2
+button = KEY_KP7
+prog = irexec
+config = echo -ne "s26\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP2
+button = KEY_KP8
+prog = irexec
+config = echo -ne "s27\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP2
+button = KEY_KP9
+prog = irexec
+config = echo -ne "s28\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP3
+button = KEY_KP0
+prog = irexec
+config = echo -ne "s29\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP3
+button = KEY_KP1
+prog = irexec
+config = echo -ne "s30\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP3
+button = KEY_KP2
+prog = irexec
+config = echo -ne "s31\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP3
+button = KEY_KP3
+prog = irexec
+config = echo -ne "s32\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP3
+button = KEY_KP4
+prog = irexec
+config = echo -ne "s33\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP3
+button = KEY_KP5
+prog = irexec
+config = echo -ne "s34\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP3
+button = KEY_KP6
+prog = irexec
+config = echo -ne "s35\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP3
+button = KEY_KP7
+prog = irexec
+config = echo -ne "s36\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP3
+button = KEY_KP8
+prog = irexec
+config = echo -ne "s37\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP3
+button = KEY_KP9
+prog = irexec
+config = echo -ne "s38\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP4
+button = KEY_KP0
+prog = irexec
+config = echo -ne "s39\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP4
+button = KEY_KP1
+prog = irexec
+config = echo -ne "s40\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP4
+button = KEY_KP2
+prog = irexec
+config = echo -ne "s41\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP4
+button = KEY_KP3
+prog = irexec
+config = echo -ne "s42\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP4
+button = KEY_KP4
+prog = irexec
+config = echo -ne "s43\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP4
+button = KEY_KP5
+prog = irexec
+config = echo -ne "s44\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP4
+button = KEY_KP6
+prog = irexec
+config = echo -ne "s45\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP4
+button = KEY_KP7
+prog = irexec
+config = echo -ne "s46\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP4
+button = KEY_KP8
+prog = irexec
+config = echo -ne "s47\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP4
+button = KEY_KP9
+prog = irexec
+config = echo -ne "s48\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP5
+button = KEY_KP0
+prog = irexec
+config = echo -ne "s49\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP5
+button = KEY_KP1
+prog = irexec
+config = echo -ne "s50\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP5
+button = KEY_KP2
+prog = irexec
+config = echo -ne "s51\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP5
+button = KEY_KP3
+prog = irexec
+config = echo -ne "s52\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP5
+button = KEY_KP4
+prog = irexec
+config = echo -ne "s53\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP5
+button = KEY_KP5
+prog = irexec
+config = echo -ne "s54\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP5
+button = KEY_KP6
+prog = irexec
+config = echo -ne "s55\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP5
+button = KEY_KP7
+prog = irexec
+config = echo -ne "s56\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP5
+button = KEY_KP8
+prog = irexec
+config = echo -ne "s57\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP5
+button = KEY_KP9
+prog = irexec
+config = echo -ne "s58\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP6
+button = KEY_KP0
+prog = irexec
+config = echo -ne "s59\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP6
+button = KEY_KP1
+prog = irexec
+config = echo -ne "s60\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP6
+button = KEY_KP2
+prog = irexec
+config = echo -ne "s61\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP6
+button = KEY_KP3
+prog = irexec
+config = echo -ne "s62\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP6
+button = KEY_KP4
+prog = irexec
+config = echo -ne "s63\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP6
+button = KEY_KP5
+prog = irexec
+config = echo -ne "s64\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP6
+button = KEY_KP6
+prog = irexec
+config = echo -ne "s65\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP6
+button = KEY_KP7
+prog = irexec
+config = echo -ne "s66\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP6
+button = KEY_KP8
+prog = irexec
+config = echo -ne "s67\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP6
+button = KEY_KP9
+prog = irexec
+config = echo -ne "s68\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP7
+button = KEY_KP0
+prog = irexec
+config = echo -ne "s69\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP7
+button = KEY_KP1
+prog = irexec
+config = echo -ne "s70\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP7
+button = KEY_KP2
+prog = irexec
+config = echo -ne "s71\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP7
+button = KEY_KP3
+prog = irexec
+config = echo -ne "s72\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP7
+button = KEY_KP4
+prog = irexec
+config = echo -ne "s73\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP7
+button = KEY_KP5
+prog = irexec
+config = echo -ne "s74\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP7
+button = KEY_KP6
+prog = irexec
+config = echo -ne "s75\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP7
+button = KEY_KP7
+prog = irexec
+config = echo -ne "s76\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP7
+button = KEY_KP8
+prog = irexec
+config = echo -ne "s77\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP7
+button = KEY_KP9
+prog = irexec
+config = echo -ne "s78\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP8
+button = KEY_KP0
+prog = irexec
+config = echo -ne "s79\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP8
+button = KEY_KP1
+prog = irexec
+config = echo -ne "s80\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP8
+button = KEY_KP2
+prog = irexec
+config = echo -ne "s81\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP8
+button = KEY_KP3
+prog = irexec
+config = echo -ne "s82\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP8
+button = KEY_KP4
+prog = irexec
+config = echo -ne "s83\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP8
+button = KEY_KP5
+prog = irexec
+config = echo -ne "s84\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP8
+button = KEY_KP6
+prog = irexec
+config = echo -ne "s85\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP8
+button = KEY_KP7
+prog = irexec
+config = echo -ne "s86\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP8
+button = KEY_KP8
+prog = irexec
+config = echo -ne "s87\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP8
+button = KEY_KP9
+prog = irexec
+config = echo -ne "s88\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP9
+button = KEY_KP0
+prog = irexec
+config = echo -ne "s89\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP9
+button = KEY_KP1
+prog = irexec
+config = echo -ne "s90\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP9
+button = KEY_KP2
+prog = irexec
+config = echo -ne "s91\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP9
+button = KEY_KP3
+prog = irexec
+config = echo -ne "s92\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP9
+button = KEY_KP4
+prog = irexec
+config = echo -ne "s93\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP9
+button = KEY_KP5
+prog = irexec
+config = echo -ne "s94\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP9
+button = KEY_KP6
+prog = irexec
+config = echo -ne "s95\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP9
+button = KEY_KP7
+prog = irexec
+config = echo -ne "s96\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP9
+button = KEY_KP8
+prog = irexec
+config = echo -ne "s97\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP9
+button = KEY_KP9
+prog = irexec
+config = echo -ne "s98\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_KP0
+button = KEY_KP0
+prog = irexec
+config = echo -ne "s99\n" > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_DOWN
+prog = irexec
+config = echo -n n > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_BACK
+prog = irexec
+config = echo -n s > "/home/pi/.config/pianobar/ctl"
+end
+
+begin
+button = KEY_SETUP
+button = KEY_SETUP
+prog = irexec
+config = espeak "re-booting now" && reboot
+end
+
+Reference:	18
+
+----------
+
+Step 140:	Update package lists
+Action:		sudo apt-get upgrade
+
+----------
+
+Step 141:	Update software
+Action:		sudo apt-get update
+
+----------
+
+Step 142:	Update firmware
+Action:		sudo rpi-update
+Reference: 	19
+
+----------
+
+Step 143:	Clean installation files
+Action:		sudo apt-get clean
+
+----------
+
+Step 144:	Backup SD Card
+Action:		sudo dd if=/dev/<SDCARD> of=/home/<USERNAME>/Desktop/PandoraPi.img bs=1M count=7450
+Reference: 	20
+
+----------
+
+References
+
+01. http://learn.adafruit.com/pi-wifi-radio/raspberry-pi-setup-1-of-3
+02. http://www.tutorialspoint.com/unix_commands/ntpdate.htm
+03. http://alexba.in/blog/2013/01/04/raspberrypi-quickstart/
+04. http://learn.adafruit.com/adafruit-16x2-character-lcd-plus-keypad-for-raspberry-pi/usage
+05. http://www.raspberrypi.org/forums/viewtopic.php?f=91&t=50398
+06. http://learn.adafruit.com/usb-audio-cards-with-a-raspberry-pi
+07. https://gist.github.com/r35krag0th/4173333
+08. http://technicaltom.wordpress.com/2013/09/12/pianobar_tls_handshake_fix/
+09. https://gist.github.com/paulbaker3/2886698
+10. https://github.com/PromyLOPh/pianobar/commit/0ba07406f7348605d82373bf43d43099033c9447
+11. http://www.raspberrypi.org/forums/viewtopic.php?f=5&t=564
+12. http://en.kioskea.net/faq/809-debian-apt-get-no-pubkey-gpg-error
+13. http://funwithdebian.blogspot.com/
+14. https://github.com/PromyLOPh/pianobar/issues/321#issuecomment-10256848
+15. https://gist.github.com/pvstodghill/4078695
+16. http://alexba.in/blog/2013/01/06/setting-up-lirc-on-the-raspberrypi/
+17. http://learn.adafruit.com/using-an-ir-remote-with-a-raspberry-pi-media-center/lirc
+18. http://www.raspberrypi.org/forums/viewtopic.php?f=38&t=57400
+19. https://github.com/raspberrypi/linux/issues/525
+20. http://raspberrypi.stackexchange.com/questions/311/how-do-i-backup-my-raspberry-pi
