@@ -1,0 +1,21 @@
+auto lo
+
+iface lo inet loopback
+
+iface eth0 inet dhcp
+
+#UNSECURED WIRELESS EXAMPLE - CHOOSE ONLY ONE!
+auto wlan0
+allow-hotplug wlan0
+iface wlan0 inet dhcp
+	wireless-essid NETWORK_ID
+
+#SECURED WIRELESS EXAMPLE - CHOOSE ONLY ONE!
+auto wlan0
+allow-hotplug wlan0
+iface wlan0 inet dhcp
+	wpa-ssid NETWORK_ID
+	wpa-psk NETWORK_PASSWORD
+
+#iface wlan0 inet manual
+#   wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
